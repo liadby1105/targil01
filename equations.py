@@ -12,7 +12,7 @@ def exponent(x:float):
         num_total=num_total+(num1/num2)
     return(num_total)
 
-def ln(x:float):
+def Ln(x:float):
     num3=0
     if x<=0:
         return(0)
@@ -22,7 +22,7 @@ def ln(x:float):
 
 
 def XtimesY(x:float,y:float):
-    num=exponent(y*ln(x))
+    num=exponent(y*Ln(x))
     if (x<=0):
         return(0)
     else:

@@ -9,10 +9,10 @@ global commit, id, giturl, grade, total
 
 
 def main():
-    print("6 Test(1,2,3,4,5,6)\n")
+    print("8 Test(1,2,3,4,5,6,7,8)\n")
+    total = 8
+    grade = 0
     try:
-        total = 6
-        grade = 0
         hw = open(sys.argv[1], 'r+').read().splitlines()
         repo_url = hw[0]
         commit_id = hw[1]
@@ -30,7 +30,7 @@ def main():
         print(e)
     try:
 # test 1
-        print("\nTest 1 (print(q.XtimesY(-2,2)=0 no setting)")
+        print("\nTest 1 (print(q.XtimesY(-2,2)=0.0 no setting)")
         f = open(basedir+"/inputs/test1.py", 'w+')
         f.write("import sys")
         f.write("\n")
@@ -45,10 +45,9 @@ def main():
         proc = subprocess.Popen(command, shell=True)
         proc.wait()
         f = open(basedir+"/outputs/test1.txt", 'r+').read().splitlines()
-        check = re.findall(r'[0-9]+', f[0])
         passed = "False"
-        for x in check:
-            if int(x) == 0:
+        for x in f:
+            if float(x)== 0.0:
                 grade += 1
                 passed = "True"
         print(passed)
@@ -60,7 +59,7 @@ def main():
         print(e)
 # test 2
     try:
-        print("\nTest 2 (print(q.XtimesY(-2.2,-2)=0 - no setting for)")
+        print("\nTest 2 (print(q.XtimesY(-2.2,-2)=0.0 - no setting for)")
         f = open(basedir+"/inputs/test2.py", 'w+')
         f.write("import sys")
         f.write("\n")
@@ -75,10 +74,9 @@ def main():
         proc = subprocess.Popen(command, shell=True)
         proc.wait()
         f = open(basedir+"/outputs/test2.txt", 'r+').read().splitlines()
-        check = re.findall(r'[0-9]+', f[0])
         passed = "False"
-        for x in check:
-            if float(x) == 0.0:
+        for x in f:
+            if float(x)== 0.0:
                 grade += 1
                 passed = "True"
         print(passed)
@@ -145,7 +143,7 @@ def main():
         print(e)
 # test 5
     try:
-        print("\nTest 5 (print(q.ln(1.5))==0.4054)")
+        print("\nTest 5 (print(q.Ln(1.5))==0.4054)")
         f = open(basedir+"/inputs/test5.py", 'w+')
         f.write("import sys")
         f.write("\n")
@@ -153,7 +151,7 @@ def main():
         f.write("\n")
         f.write("import equations as q")
         f.write("\n")
-        f.write("print(q.ln(1.5))")
+        f.write("print(q.Ln(1.5))")
         f.close()
         command = "cd "+repo_path+" && python " + basedir + \
             "/inputs/test5.py" + " > "+basedir+"/outputs/test5.txt"
@@ -196,6 +194,69 @@ def main():
         print(passed)
         f = open(basedir+"/outputs/Total.txt", 'a')
         f.write("\nTest6:"+passed)
+        f.close()
+
+    except Exception as e:
+        print(e)
+
+
+
+# test7
+    try:
+        print("\nTest 7 (print(q.calculate(0)))==0.0 no sett)")
+        f = open(basedir+"/inputs/test7.py", 'w+')
+        f.write("import sys")
+        f.write("\n")
+        f.write("sys.path.insert(1,'"+basedir+"')")
+        f.write("\n")
+        f.write("import equations as q")
+        f.write("\n")
+        f.write("print(q.calculate(0))")
+        f.close()
+        command = "cd "+repo_path+" && python " + basedir + \
+            "/inputs/test7.py" + " > "+basedir+"/outputs/test7.txt"
+        proc = subprocess.Popen(command, shell=True)
+        proc.wait()
+        f = open(basedir+"/outputs/test7.txt", 'r+').read().splitlines()
+        passed = "False"
+        for x in f:
+            if float(x)== 0.0:
+                grade += 1
+                passed = "True"
+        print(passed)
+        f = open(basedir+"/outputs/Total.txt", 'a')
+        f.write("\nTest7:"+passed)
+        f.close()
+
+    except Exception as e:
+        print(e)
+        
+
+# test8
+    try:
+        print("\nTest 8 (print(q.calculate(-1)))==0.0 no sett)")
+        f = open(basedir+"/inputs/test8.py", 'w+')
+        f.write("import sys")
+        f.write("\n")
+        f.write("sys.path.insert(1,'"+basedir+"')")
+        f.write("\n")
+        f.write("import equations as q")
+        f.write("\n")
+        f.write("print(q.calculate(-1))")
+        f.close()
+        command = "cd "+repo_path+" && python " + basedir + \
+            "/inputs/test8.py" + " > "+basedir+"/outputs/test8.txt"
+        proc = subprocess.Popen(command, shell=True)
+        proc.wait()
+        f = open(basedir+"/outputs/test8.txt", 'r+').read().splitlines()
+        passed = "False"
+        for x in f:
+            if float(x)== 0.0:
+                grade += 1
+                passed = "True"
+        print(passed)
+        f = open(basedir+"/outputs/Total.txt", 'a')
+        f.write("\nTest7:"+passed)
         f.close()
 
     except Exception as e:
